@@ -49,7 +49,7 @@ def display_resume_analysis_summary(resume_data):
     col1, col2 = st.columns(2)
     
     with col1:
-        st.markdown("""<h4 style="color: #1A237E; margin-bottom: 10px;">Strengths</h4>""", unsafe_allow_html=True)
+        st.markdown(f"""<h4 style="color: {COLORS['primary']}; margin-bottom: 15px; font-weight: 700;">✨ Strengths</h4>""", unsafe_allow_html=True)
         strengths = []
         # Identify strengths based on skills and experience
         if any(len(categorized_skills[cat]) > 0 for cat in ["Programming", "Data Science"]):
@@ -59,24 +59,26 @@ def display_resume_analysis_summary(resume_data):
         if any("ml" in skill.lower() or "ai" in skill.lower() for skill in skills):
             strengths.append("Machine learning knowledge")
         
-        # Display strengths with high-contrast styling
+        # Display strengths with light, readable styling
         if strengths:
             for strength in strengths:
                 st.markdown(
-                    f"""<div style="background-color: #01579B; color: white; padding: 12px; 
-                    border-radius: 6px; margin-bottom: 10px; font-weight: 500;">
-                    ✅ {strength}</div>""", 
+                    f"""<div style="background: {COLORS['gradient_light4']}; color: {COLORS['text_dark']}; padding: 16px; 
+                    border-radius: 12px; margin-bottom: 12px; font-weight: 500; border-left: 4px solid {COLORS['success']}; 
+                    box-shadow: 0 2px 8px {COLORS['shadow']};">
+                    <span style="color: {COLORS['success']}; font-weight: 600; margin-right: 8px;">✅</span>{strength}</div>""", 
                     unsafe_allow_html=True
                 )
         else:
             st.markdown(
-                """<div style="background-color: #546E7A; color: white; padding: 12px; 
-                border-radius: 6px;">Not enough information to determine strengths</div>""", 
+                f"""<div style="background: {COLORS['card_bg']}; color: {COLORS['text_medium']}; padding: 16px; 
+                border-radius: 12px; border: 2px solid {COLORS['border']}; box-shadow: 0 2px 8px {COLORS['shadow']};">
+                Not enough information to determine strengths</div>""", 
                 unsafe_allow_html=True
             )
     
     with col2:
-        st.markdown("""<h4 style="color: #B71C1C; margin-bottom: 10px;">Areas to Improve</h4>""", unsafe_allow_html=True)
+        st.markdown(f"""<h4 style="color: {COLORS['warning']}; margin-bottom: 15px; font-weight: 700;">📈 Areas to Improve</h4>""", unsafe_allow_html=True)
         improvements = []
         # Identify improvement areas
         if not any("git" in skill.lower() for skill in skills):
@@ -86,19 +88,21 @@ def display_resume_analysis_summary(resume_data):
         if not any(cloud in "".join(skills).lower() for cloud in ["aws", "azure", "gcp", "cloud"]):
             improvements.append("Cloud platform experience")
         
-        # Display improvement areas with high-contrast styling
+        # Display improvement areas with readable styling
         if improvements:
             for improvement in improvements:
                 st.markdown(
-                    f"""<div style="background-color: #C62828; color: white; padding: 12px; 
-                    border-radius: 6px; margin-bottom: 10px; font-weight: 500;">
-                    ⚠️ {improvement}</div>""", 
+                    f"""<div style="background: {COLORS['gradient_light2']}; color: {COLORS['text_dark']}; padding: 16px; 
+                    border-radius: 12px; margin-bottom: 12px; font-weight: 500; border-left: 4px solid {COLORS['warning']}; 
+                    box-shadow: 0 2px 8px {COLORS['shadow']};">
+                    <span style="color: {COLORS['warning']}; font-weight: 600; margin-right: 8px;">⚠️</span>{improvement}</div>""", 
                     unsafe_allow_html=True
                 )
         else:
             st.markdown(
-                """<div style="background-color: #2E7D32; color: white; padding: 12px; 
-                border-radius: 6px;">No obvious improvement areas identified</div>""", 
+                f"""<div style="background: {COLORS['gradient_light4']}; color: {COLORS['text_dark']}; padding: 16px; 
+                border-radius: 12px; border-left: 4px solid {COLORS['success']}; box-shadow: 0 2px 8px {COLORS['shadow']};">
+                No obvious improvement areas identified</div>""", 
                 unsafe_allow_html=True
             )
 
@@ -146,62 +150,72 @@ def display_extracted_information(resume_data):
     info_col1, info_col2 = st.columns(2)
     
     with info_col1:
-        # Display contact info
-        st.markdown("""<h4 style="color: #333; margin-bottom: 10px;">📞 Contact Information</h4>""", unsafe_allow_html=True)
+        # Display contact info with readable styling
+        st.markdown(f"""<h4 style="color: {COLORS['text_dark']}; margin-bottom: 12px; font-weight: 700;">📞 Contact Information</h4>""", unsafe_allow_html=True)
         contact_info = resume_data.get("contact_info", {})
-        contact_html = """<div style="background-color: #1A237E; color: white; padding: 15px; border-radius: 8px; margin-bottom: 15px;">"""
+        contact_html = f"""<div style="background: {COLORS['card_bg']}; color: {COLORS['text_dark']}; padding: 20px; border-radius: 12px; margin-bottom: 18px; border: 1px solid {COLORS['border']}; box-shadow: 0 2px 12px {COLORS['shadow']};">"""
         
         if contact_info and (contact_info.get("email") or contact_info.get("phone")):
             if contact_info.get("email"):
-                contact_html += f"<p><strong>Email:</strong> {contact_info['email']}</p>"
+                contact_html += f"<p style='margin: 10px 0; font-weight: 500; color: {COLORS['text_dark']};'><span style='color: {COLORS['primary']}; font-weight: 600; margin-right: 8px;'>📧 Email:</span> <span style='color: {COLORS['text_medium']};'>{contact_info['email']}</span></p>"
             if contact_info.get("phone"):
-                contact_html += f"<p><strong>Phone:</strong> {contact_info['phone']}</p>"
+                contact_html += f"<p style='margin: 10px 0; font-weight: 500; color: {COLORS['text_dark']};'><span style='color: {COLORS['primary']}; font-weight: 600; margin-right: 8px;'>📱 Phone:</span> <span style='color: {COLORS['text_medium']};'>{contact_info['phone']}</span></p>"
         else:
-            contact_html += "<p>No contact information detected.</p>"
+            contact_html += f"<p style='margin: 0; color: {COLORS['text_medium']};'>No contact information detected.</p>"
         
         contact_html += "</div>"
         st.markdown(contact_html, unsafe_allow_html=True)
         
-        # Display education
-        st.markdown("""<h4 style="color: #333; margin-bottom: 10px;">🎓 Education</h4>""", unsafe_allow_html=True)
+        # Display education with readable styling
+        st.markdown(f"""<h4 style="color: {COLORS['text_dark']}; margin-bottom: 12px; font-weight: 700;">🎓 Education</h4>""", unsafe_allow_html=True)
         education = resume_data.get("education", [])
-        education_html = """<div style="background-color: #4A148C; color: white; padding: 15px; border-radius: 8px;">"""
+        education_html = f"""<div style="background: {COLORS['card_bg']}; color: {COLORS['text_dark']}; padding: 20px; border-radius: 12px; border: 1px solid {COLORS['border']}; box-shadow: 0 2px 12px {COLORS['shadow']};">"""
         
         if education:
             for edu in education:
-                education_html += f"<p>• {edu}</p>"
+                education_html += f"<p style='margin: 10px 0; font-weight: 500; color: {COLORS['text_dark']};'><span style='color: {COLORS['secondary']}; margin-right: 8px;'>🎓</span>{edu}</p>"
         else:
-            education_html += "<p>No education information detected.</p>"
+            education_html += f"<p style='margin: 0; color: {COLORS['text_medium']};'>No education information detected.</p>"
         
         education_html += "</div>"
         st.markdown(education_html, unsafe_allow_html=True)
     
     with info_col2:
-        # Display skills with high-contrast horizontal layout
-        st.markdown("""<h4 style="color: #333; margin-bottom: 10px;">🛠️ Skills</h4>""", unsafe_allow_html=True)
+        # Display skills with readable, colorful badges
+        st.markdown(f"""<h4 style="color: {COLORS['text_dark']}; margin-bottom: 12px; font-weight: 700;">🛠️ Skills</h4>""", unsafe_allow_html=True)
         skills = resume_data.get("skills", [])
         
         if skills:
             # Create a flex container for horizontal layout
-            skills_html = """<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;">"""
+            skills_html = """<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px;">"""
             
-            # Add each skill with a high-contrast background
-            for skill in skills:
-                skills_html += f"""<div style="background-color: #0D47A1; color: white; 
-                padding: 8px 12px; border-radius: 20px; font-weight: 500; margin-bottom: 8px;">
+            # Add each skill with colorful but readable backgrounds
+            skill_colors = [
+                f"background: {COLORS['primary']}; color: white;",
+                f"background: {COLORS['secondary']}; color: white;",
+                f"background: {COLORS['tertiary']}; color: white;",
+                f"background: {COLORS['quaternary']}; color: white;",
+                f"background: {COLORS['accent1']}; color: white;",
+            ]
+            for i, skill in enumerate(skills):
+                color_style = skill_colors[i % len(skill_colors)]
+                skills_html += f"""<div style="{color_style} 
+                padding: 10px 18px; border-radius: 20px; font-weight: 500; margin-bottom: 8px; 
+                box-shadow: 0 2px 8px {COLORS['shadow']}; font-size: 0.9rem; display: inline-block;">
                 {skill}</div>"""
             
             skills_html += "</div>"
             st.markdown(skills_html, unsafe_allow_html=True)
         else:
             st.markdown(
-                """<div style="background-color: #546E7A; color: white; padding: 15px; 
-                border-radius: 8px;">No skills detected.</div>""", 
+                f"""<div style="background: {COLORS['card_bg']}; color: {COLORS['text_medium']}; padding: 18px; 
+                border-radius: 12px; border: 1px solid {COLORS['border']}; box-shadow: 0 2px 8px {COLORS['shadow']};">
+                No skills detected.</div>""", 
                 unsafe_allow_html=True
             )
         
         # Display experience using the organized categories function
-        st.markdown("""<h4 style="color: #333; margin-bottom: 10px;">💼 Experience</h4>""", unsafe_allow_html=True)
+        st.markdown(f"""<h4 style="color: {COLORS['accent']}; margin-bottom: 12px; font-weight: 700;">💼 Experience</h4>""", unsafe_allow_html=True)
         experience = resume_data.get("experience", [])
         
         if experience:
@@ -211,44 +225,55 @@ def display_extracted_information(resume_data):
             # Display each category in an accordion-like structure
             for category, items in organized_exp.items():
                 if items:
-                    # Set category-specific colors
+                    # Set category-specific colors (readable)
                     if "Programming" in category:
-                        bg_color = "#01579B"  # Deep blue
+                        bg_color = COLORS['primary']
+                        bg_light = COLORS['gradient_light3']
                     elif "Machine Learning" in category or "AI" in category:
-                        bg_color = "#4A148C"  # Deep purple
+                        bg_color = COLORS['secondary']
+                        bg_light = COLORS['gradient_light1']
                     elif "Cloud" in category:
-                        bg_color = "#004D40"  # Deep teal
+                        bg_color = COLORS['quaternary']
+                        bg_light = COLORS['gradient_light4']
                     elif "Data" in category:
-                        bg_color = "#BF360C"  # Deep orange
+                        bg_color = COLORS['tertiary']
+                        bg_light = COLORS['gradient_light2']
                     elif "Companies" in category:
-                        bg_color = "#B71C1C"  # Deep red
+                        bg_color = COLORS['accent2']
+                        bg_light = COLORS['gradient_light1']
                     else:
-                        bg_color = "#37474F"  # Deep blue-grey
+                        bg_color = COLORS['primary']
+                        bg_light = COLORS['gradient_light3']
                     
                     # Create category header
                     st.markdown(
-                        f"""<div style="background-color: {bg_color}; color: white; padding: 10px; 
-                        border-radius: 8px 8px 0 0; font-weight: bold; margin-top: 10px;">
+                        f"""<div style="background: {bg_color}; color: white; padding: 14px; 
+                        border-radius: 12px 12px 0 0; font-weight: 600; margin-top: 12px; 
+                        box-shadow: 0 2px 8px {COLORS['shadow']};">
                         {category} ({len(items)})</div>""", 
                         unsafe_allow_html=True
                     )
                     
-                    # Create flex container for items
-                    items_html = f"""<div style="background-color: {bg_color}; opacity: 0.9; color: white; 
-                    padding: 10px; border-radius: 0 0 8px 8px; margin-bottom: 10px;">
-                    <div style="display: flex; flex-wrap: wrap; gap: 6px;">"""
+                    # Create flex container for items with light background
+                    items_html = f"""<div style="background: {bg_light}; color: {COLORS['text_dark']}; 
+                    padding: 16px; border-radius: 0 0 12px 12px; margin-bottom: 12px; 
+                    box-shadow: 0 2px 8px {COLORS['shadow']}; border: 1px solid {COLORS['border']};">
+                    <div style="display: flex; flex-wrap: wrap; gap: 8px;">"""
                     
                     for item in items:
-                        items_html += f"""<div style="background-color: rgba(255,255,255,0.2); 
-                        padding: 6px 10px; border-radius: 15px; margin-bottom: 6px;">
+                        items_html += f"""<div style="background-color: {COLORS['card_bg']}; 
+                        padding: 10px 16px; border-radius: 20px; margin-bottom: 6px; font-weight: 500; 
+                        color: {COLORS['text_dark']}; border: 1px solid {COLORS['border_light']}; 
+                        box-shadow: 0 1px 4px {COLORS['shadow']};">
                         {item}</div>"""
                     
                     items_html += "</div></div>"
                     st.markdown(items_html, unsafe_allow_html=True)
         else:
             st.markdown(
-                """<div style="background-color: #546E7A; color: white; padding: 15px; 
-                border-radius: 8px;">No experience information detected.</div>""", 
+                f"""<div style="background: {COLORS['card_bg']}; color: {COLORS['text_medium']}; padding: 18px; 
+                border-radius: 12px; border: 1px solid {COLORS['border']}; box-shadow: 0 2px 8px {COLORS['shadow']};">
+                No experience information detected.</div>""", 
                 unsafe_allow_html=True
             )
 
@@ -285,23 +310,24 @@ def display_formatted_analysis(analysis):
         if current_section and line:
             sections[current_section] += line + "\n"
     
-    # Display each section in a formatted way with improved visibility
-    section_colors = {
-        "Overall Assessment": "#3a506b",
-        "Content Improvements": "#1b3a4b",
-        "Skills": "#006466",
-        "Format Suggestions": "#4d194d",
-        "ATS Optimization": "#54478c"
+    # Display each section with readable light backgrounds
+    section_styles = {
+        "Overall Assessment": {"bg": COLORS['gradient_light1'], "border": COLORS['primary']},
+        "Content Improvements": {"bg": COLORS['gradient_light2'], "border": COLORS['tertiary']},
+        "Skills": {"bg": COLORS['gradient_light3'], "border": COLORS['accent1']},
+        "Format Suggestions": {"bg": COLORS['gradient_light4'], "border": COLORS['quaternary']},
+        "ATS Optimization": {"bg": COLORS['gradient_light1'], "border": COLORS['secondary']}
     }
     
     for section, content in sections.items():
         if content.strip():
             st.subheader(section)
-            bg_color = section_colors.get(section, "#3a506b")
+            style = section_styles.get(section, {"bg": COLORS['card_bg'], "border": COLORS['primary']})
             st.markdown(
-                f"""<div style='background-color: {bg_color}; color: white; 
-                padding: 15px; border-radius: 8px; margin-top: 10px; 
-                font-size: 16px; line-height: 1.5;'>{content}</div>""", 
+                f"""<div style='background: {style["bg"]}; color: {COLORS['text_dark']}; 
+                padding: 24px; border-radius: 12px; margin-top: 15px; 
+                font-size: 15px; line-height: 1.8; box-shadow: 0 2px 12px {COLORS['shadow']}; 
+                font-weight: 400; border-left: 4px solid {style["border"]};'>{content}</div>""", 
                 unsafe_allow_html=True
             )
 
@@ -316,16 +342,18 @@ def format_job_description(description):
         str: Formatted HTML for the job description
     """
     if not description:
-        return """<div style="background-color: #455A64; color: white; padding: 15px; 
-                border-radius: 8px; margin-top: 15px;">No description available</div>"""
+        return f"""<div style="background: {COLORS['card_bg']}; color: {COLORS['text_medium']}; padding: 24px; 
+                border-radius: 12px; margin-top: 15px; border: 1px solid {COLORS['border']}; 
+                box-shadow: 0 2px 12px {COLORS['shadow']};">No description available</div>"""
     
     # Clean up any problematic formatting
     description = description.replace('\n\n', '<br><br>').replace('\n', '<br>')
     
-    # Wrap the description in a styled div with high contrast
+    # Wrap the description in a readable styled div
     formatted_description = f"""
-    <div style="background-color: #263238; color: white; padding: 15px; 
-    border-radius: 8px; margin-top: 15px; line-height: 1.5; font-size: 16px;">
+    <div style="background: {COLORS['card_bg']}; color: {COLORS['text_dark']}; padding: 24px; 
+    border-radius: 12px; margin-top: 15px; line-height: 1.8; font-size: 15px; 
+    border: 1px solid {COLORS['border']}; box-shadow: 0 2px 12px {COLORS['shadow']};">
         {description}
     </div>
     """
@@ -356,20 +384,22 @@ def display_matching_skills(skills, job_description):
             matching_skills.append(skill)
     
     if matching_skills:
-        st.markdown("""<h4 style="color: #1A237E; margin-bottom: 10px;">Skills Matching Job Description</h4>""", unsafe_allow_html=True)
-        skills_html = """<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;">"""
+        st.markdown(f"""<h4 style="color: {COLORS['text_dark']}; margin-bottom: 12px; font-weight: 700;">✅ Skills Matching Job Description</h4>""", unsafe_allow_html=True)
+        skills_html = """<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px;">"""
         
         for skill in matching_skills[:5]:  # Show top 5 matching skills
-            skills_html += f"""<div style="background-color: #01579B; color: white; 
-            padding: 8px 12px; border-radius: 20px; font-weight: 500; margin-bottom: 8px;">
+            skills_html += f"""<div style="background: {COLORS['success']}; color: white; 
+            padding: 10px 18px; border-radius: 25px; font-weight: 500; margin-bottom: 8px; 
+            box-shadow: 0 2px 8px {COLORS['shadow']};">
             ✅ {skill}</div>"""
         
         skills_html += "</div>"
         st.markdown(skills_html, unsafe_allow_html=True)
     else:
         st.markdown(
-            """<div style="background-color: #455A64; color: white; padding: 12px; 
-            border-radius: 6px;">No matching skills detected in the job description.</div>""", 
+            f"""<div style="background: {COLORS['card_bg']}; color: {COLORS['text_medium']}; padding: 16px; 
+            border-radius: 12px; border: 1px solid {COLORS['border']}; box-shadow: 0 2px 8px {COLORS['shadow']};">
+            No matching skills detected in the job description.</div>""", 
             unsafe_allow_html=True
         )
     
@@ -386,196 +416,591 @@ def display_matching_skills(skills, job_description):
             missing_skills.append(tech)
     
     if missing_skills:
-        st.markdown("""<h4 style="color: #B71C1C; margin-bottom: 10px;">Skills to Emphasize or Develop</h4>""", unsafe_allow_html=True)
-        missing_html = """<div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px;">"""
+        st.markdown(f"""<h4 style="color: {COLORS['text_dark']}; margin-bottom: 12px; font-weight: 700;">⚠️ Skills to Emphasize or Develop</h4>""", unsafe_allow_html=True)
+        missing_html = """<div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 18px;">"""
         
         for skill in missing_skills[:5]:  # Show top 5 missing skills
-            missing_html += f"""<div style="background-color: #C62828; color: white; 
-            padding: 8px 12px; border-radius: 20px; font-weight: 500; margin-bottom: 8px;">
+            missing_html += f"""<div style="background: {COLORS['warning']}; color: white; 
+            padding: 10px 18px; border-radius: 25px; font-weight: 500; margin-bottom: 8px; 
+            box-shadow: 0 2px 8px {COLORS['shadow']};">
             ⚠️ {skill.title()}</div>"""
         
         missing_html += "</div>"
         st.markdown(missing_html, unsafe_allow_html=True)
 
 def apply_styling():
-    """Apply custom CSS styling to the Streamlit app."""
+    """Apply custom CSS styling to make it look like a modern website."""
     st.markdown(f"""
     <style>
-        /* Global font styling */
+        /* Hide Streamlit default elements */
+        #MainMenu {{visibility: hidden;}}
+        footer {{visibility: hidden;}}
+        header {{visibility: hidden;}}
+        
+        /* Global font styling - Modern website typography */
         * {{
-            font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif !important;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif !important;
         }}
         
-        /* Main header styling */
-        h1, h2, .main-header {{
-            color: white !important;
-            background-color: {COLORS['primary']} !important;
-            padding: 20px !important;
-            border-radius: 8px !important;
-            margin-bottom: 20px !important;
-            font-weight: bold !important;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
+        /* Website-like container with proper spacing */
+        .main .block-container {{
+            max-width: 1200px !important;
+            padding: 2rem 3rem !important;
+            padding-top: 1rem !important;
         }}
         
-        /* Blue header panels styling */
+        /* Fix Streamlit's default spacing issues */
+        .main > div {{
+            padding-top: 0 !important;
+        }}
+        
+        /* Ensure proper flow */
+        div[data-testid="stVerticalBlock"] {{
+            gap: 1.5rem !important;
+        }}
+        
+        /* Fix for Streamlit columns */
+        [data-testid="stHorizontalBlock"] {{
+            gap: 1rem !important;
+            margin-bottom: 1.5rem !important;
+        }}
+        
+        /* Modern website header/navbar style */
+        .stApp {{
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%) !important;
+        }}
+        
+        /* Website-style headers with proper spacing */
+        h1 {{
+            color: {COLORS['text_dark']} !important;
+            font-size: 2.5rem !important;
+            font-weight: 700 !important;
+            margin-top: 0 !important;
+            margin-bottom: 1.5rem !important;
+            line-height: 1.2 !important;
+            padding: 0 !important;
+        }}
+        
+        h2 {{
+            color: {COLORS['text_dark']} !important;
+            font-size: 2rem !important;
+            font-weight: 600 !important;
+            margin-top: 2rem !important;
+            margin-bottom: 1rem !important;
+            padding: 0 !important;
+        }}
+        
+        h3 {{
+            color: {COLORS['text_dark']} !important;
+            font-size: 1.5rem !important;
+            font-weight: 600 !important;
+            margin-top: 1.5rem !important;
+            margin-bottom: 1rem !important;
+            padding: 0 !important;
+        }}
+        
+        h4 {{
+            color: {COLORS['text_dark']} !important;
+            font-size: 1.25rem !important;
+            font-weight: 600 !important;
+            margin-top: 1.25rem !important;
+            margin-bottom: 0.75rem !important;
+            padding: 0 !important;
+        }}
+        
+        /* Fix subheader spacing */
+        [data-testid="stHeader"] {{
+            margin-bottom: 1rem !important;
+            padding: 0 !important;
+        }}
+        
+        /* Fix subheader text */
+        .stSubheader {{
+            margin-top: 1.5rem !important;
+            margin-bottom: 1rem !important;
+            padding: 0 !important;
+        }}
+        
+        /* Header panels with gradients */
         div[style*="background-color: {COLORS['primary']}"],
-        div[style*="background-color: rgb(28, 78, 128)"],
+        div[style*="background: linear-gradient"],
         [data-testid="stForm"] h3,
         .blue-header {{
             color: white !important;
-            font-size: 1.2rem !important;
-            font-weight: bold !important;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3) !important;
-            padding: 15px !important;
-            border-radius: 6px !important;
-            margin-bottom: 15px !important;
-            background-color: {COLORS['primary']} !important;
+            font-size: 1.3rem !important;
+            font-weight: 700 !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+            padding: 18px !important;
+            border-radius: 12px !important;
+            margin-bottom: 18px !important;
+            background: {COLORS['gradient1']} !important;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.25) !important;
         }}
         
-        /* Fix for text in blue panels */
+        /* Fix for text in colored panels */
         div[style*="background-color: {COLORS['primary']}"] p,
+        div[style*="background: linear-gradient"] p,
         div[style*="background-color: {COLORS['primary']}"] span,
+        div[style*="background: linear-gradient"] span,
         div[style*="background-color: {COLORS['primary']}"] h3,
+        div[style*="background: linear-gradient"] h3,
         div[style*="background-color: {COLORS['primary']}"] h4,
-        div[style*="background-color: {COLORS['primary']}"] div {{
+        div[style*="background: linear-gradient"] h4 {{
             color: white !important;
-            font-weight: bold !important;
+            font-weight: 600 !important;
         }}
         
-        /* All form inputs styling */
+        /* Form inputs - Modern styling */
         input, select, textarea, 
         [data-baseweb="input"], 
         [data-baseweb="select"], 
         [data-baseweb="textarea"] {{
-            color: black !important;
+            color: {COLORS['text_dark']} !important;
             background-color: white !important;
-            border: 1px solid #cccccc !important;
-            border-radius: 4px !important;
-            padding: 8px !important;
+            border: 2px solid {COLORS['border']} !important;
+            border-radius: 10px !important;
+            padding: 10px 14px !important;
+            transition: all 0.3s ease !important;
         }}
         
-        /* Buttons styled */
+        input:focus, select:focus, textarea:focus {{
+            border-color: {COLORS['primary']} !important;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1) !important;
+        }}
+        
+        /* Website-style buttons */
         .stButton>button,
         button[kind="primary"] {{
-            background-color: {COLORS["accent3"]} !important;
+            background: {COLORS['primary']} !important;
             color: white !important;
-            font-weight: bold !important;
-            border-radius: 4px !important;
-            padding: 0.5rem 1rem !important;
+            font-weight: 500 !important;
+            border-radius: 8px !important;
+            padding: 0.75rem 2rem !important;
             border: none !important;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
-            transition: all 0.3s ease !important;
-            width: 100% !important;
-            font-size: 16px !important;
+            box-shadow: 0 2px 4px rgba(0, 122, 255, 0.2) !important;
+            transition: all 0.2s ease !important;
+            width: auto !important;
+            font-size: 1rem !important;
             height: auto !important;
-            min-height: 45px !important;
+            min-height: 44px !important;
+            text-transform: none !important;
+            cursor: pointer !important;
         }}
         
         .stButton>button:hover,
         button[kind="primary"]:hover {{
-            background-color: #E67E22 !important;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+            background: {COLORS['primary_dark']} !important;
+            box-shadow: 0 4px 8px rgba(0, 122, 255, 0.3) !important;
             transform: translateY(-1px) !important;
         }}
         
-        /* Table styling */
+        .stButton>button:active {{
+            transform: translateY(0) !important;
+        }}
+        
+        /* Website-style tables */
         table, .dataframe, [data-testid="stTable"] {{
             width: 100% !important;
-            border-collapse: collapse !important;
-            margin-bottom: 20px !important;
-            border-radius: 4px !important;
+            border-collapse: separate !important;
+            border-spacing: 0 !important;
+            margin-bottom: 2rem !important;
+            border-radius: 8px !important;
             overflow: hidden !important;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+            background: white !important;
+            border: 1px solid {COLORS['border']} !important;
         }}
         
         /* Table headers */
         th, thead tr th {{
-            background-color: #222222 !important;
+            background: {COLORS['primary']} !important;
             color: white !important;
-            font-weight: bold !important;
-            padding: 12px 8px !important;
+            font-weight: 600 !important;
+            padding: 1rem !important;
             text-align: left !important;
             border: none !important;
+            font-size: 0.875rem !important;
+            letter-spacing: 0.3px !important;
         }}
         
         /* Table cells */
         td, tbody tr td {{
-            padding: 12px 8px !important;
-            border-bottom: 1px solid #EEEEEE !important;
+            padding: 1rem !important;
+            border-bottom: 1px solid {COLORS['border_light']} !important;
             background-color: white !important;
-            color: black !important;
+            color: {COLORS['text_dark']} !important;
         }}
         
         /* Alternate row styling */
         tbody tr:nth-child(even) td {{
-            background-color: #f9f9f9 !important;
+            background-color: #fafafa !important;
         }}
         
-        /* Tab navigation */
+        tbody tr:hover td {{
+            background-color: rgba(0, 122, 255, 0.05) !important;
+            transition: background-color 0.15s ease !important;
+        }}
+        
+        tbody tr:last-child td {{
+            border-bottom: none !important;
+        }}
+        
+        /* Website-style navigation tabs */
         div[data-baseweb="tab-list"] {{
             gap: 0 !important;
-            background-color: {COLORS["background"]} !important;
-            padding: 10px !important;
-            border-radius: 12px !important;
+            background: transparent !important;
+            padding: 0 !important;
+            border-bottom: 2px solid {COLORS['border']} !important;
             display: flex !important;
-            justify-content: space-between !important;
+            justify-content: flex-start !important;
             width: 100% !important;
-            margin-bottom: 20px !important;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1) !important;
+            margin-bottom: 3rem !important;
+            box-shadow: none !important;
         }}
         
         div[data-baseweb="tab-list"] button {{
-            flex: 1 !important;
+            flex: none !important;
             text-align: center !important;
-            margin: 0 5px !important;
-            height: 60px !important;
-            font-size: 16px !important;
-            background-color: rgba(255, 255, 255, 0.7) !important;
-            color: {COLORS["primary"]} !important;
-            border-radius: 8px !important;
-            border: 1px solid rgba(0,0,0,0.05) !important;
-            transition: all 0.3s ease !important;
+            margin: 0 !important;
+            margin-right: 2rem !important;
+            padding: 1rem 1.5rem !important;
+            height: auto !important;
+            font-size: 1rem !important;
+            font-weight: 500 !important;
+            background: transparent !important;
+            color: {COLORS['text_medium']} !important;
+            border-radius: 0 !important;
+            border: none !important;
+            border-bottom: 3px solid transparent !important;
+            transition: all 0.2s ease !important;
+            box-shadow: none !important;
+        }}
+        
+        div[data-baseweb="tab-list"] button:hover {{
+            background: transparent !important;
+            color: {COLORS['primary']} !important;
+            border-bottom-color: {COLORS['primary']} !important;
+            transform: none !important;
         }}
         
         div[data-baseweb="tab-list"] button[aria-selected="true"] {{
-            background-color: {COLORS["primary"]} !important;
-            color: white !important;
-            border-bottom: 3px solid {COLORS["accent3"]} !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-            transform: translateY(-2px) !important;
+            background: transparent !important;
+            color: {COLORS['primary']} !important;
+            border-bottom-color: {COLORS['primary']} !important;
+            font-weight: 600 !important;
+            box-shadow: none !important;
+            transform: none !important;
         }}
         
-        /* Background colors */
+        /* Website-style backgrounds */
         body {{
-            background-color: #FFFFFF !important;
+            background: #ffffff !important;
         }}
         
         .stApp {{
-            background-color: #FFFFFF !important;
+            background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%) !important;
+        }}
+        
+        /* Fix overlapping issues - Remove problematic card styling */
+        /* [data-testid="stVerticalBlock"] > div {{
+            background: white !important;
+            border-radius: 8px !important;
+            padding: 1.5rem !important;
+            margin-bottom: 1.5rem !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+            border: 1px solid {COLORS['border_light']} !important;
+        }} */
+        
+        /* Ensure proper spacing between elements */
+        .element-container {{
+            margin-bottom: 1.5rem !important;
+            padding: 0 !important;
+        }}
+        
+        .stMarkdown {{
+            margin-bottom: 1rem !important;
+        }}
+        
+        /* Fix column spacing */
+        [data-testid="column"] {{
+            padding: 0 0.75rem !important;
+        }}
+        
+        /* Ensure proper spacing for forms */
+        [data-testid="stForm"] {{
+            margin-bottom: 2rem !important;
+        }}
+        
+        /* Fix spacing for file uploader */
+        [data-testid="stFileUploader"] {{
+            margin-bottom: 1.5rem !important;
+        }}
+        
+        /* Make file uploader label text black and bold */
+        [data-testid="stFileUploader"] + label,
+        label[data-testid*="uploader"],
+        div[data-testid="stFileUploader"] ~ label,
+        .stFileUploader + label {{
+            color: {COLORS['text_dark']} !important;
+            font-weight: 700 !important;
+            font-size: 1.1rem !important;
+        }}
+        
+        /* Fix spacing for selectboxes and inputs */
+        [data-baseweb="select"],
+        [data-baseweb="input"],
+        [data-baseweb="textarea"] {{
+            margin-bottom: 1rem !important;
+        }}
+        
+        /* Fix spacing for buttons */
+        .stButton {{
+            margin-bottom: 1rem !important;
+        }}
+        
+        /* Fix spacing for columns */
+        .stColumns {{
+            margin-bottom: 2rem !important;
+        }}
+        
+        /* Ensure no negative margins */
+        * {{
+            margin-top: 0 !important;
+        }}
+        
+        /* Fix for Streamlit containers */
+        .block-container {{
+            padding-top: 1rem !important;
+            padding-bottom: 2rem !important;
+        }}
+        
+        /* Form inputs - Website style */
+        [data-baseweb="input"] {{
+            border-radius: 6px !important;
+            border: 1px solid {COLORS['border']} !important;
+        }}
+        
+        [data-baseweb="input"]:focus {{
+            border-color: {COLORS['primary']} !important;
+            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1) !important;
+        }}
+        
+        /* Select boxes */
+        [data-baseweb="select"] {{
+            border-radius: 6px !important;
         }}
         
         /* Headers inside panels */
         .stExpander h3, .stForm h3 {{
-            color: {COLORS["primary"]} !important;
-            font-weight: bold !important;
+            color: {COLORS['primary']} !important;
+            font-weight: 700 !important;
         }}
         
-        /* Expandable sections */
+        /* Website-style expandable sections with proper spacing */
         .stExpander {{
-            border: 1px solid #eee !important;
+            border: 1px solid {COLORS['border']} !important;
             border-radius: 8px !important;
             overflow: hidden !important;
+            margin-top: 0 !important;
+            margin-bottom: 1.5rem !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+            background: white !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important;
+            transition: all 0.2s ease !important;
+            position: relative !important;
+            z-index: 1 !important;
+        }}
+        
+        .stExpander:hover {{
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
+            border-color: {COLORS['primary']} !important;
         }}
         
         .stExpander details {{
             padding: 0 !important;
+            margin: 0 !important;
         }}
         
         .stExpander summary {{
-            padding: 15px !important;
-            background-color: #f5f7fa !important;
-            font-weight: bold !important;
-            color: {COLORS["primary"]} !important;
+            padding: 1.25rem 1.5rem !important;
+            background: white !important;
+            font-weight: 500 !important;
+            color: {COLORS['text_dark']} !important;
+            font-size: 1rem !important;
+            cursor: pointer !important;
+            margin: 0 !important;
+        }}
+        
+        .stExpander summary:hover {{
+            background: #f8f9fa !important;
+        }}
+        
+        /* Fix content inside expanders */
+        .stExpander > div {{
+            padding: 1.5rem !important;
+            margin: 0 !important;
+        }}
+        
+        /* File uploader styling */
+        [data-testid="stFileUploader"] {{
+            border: 2px dashed {COLORS['primary']} !important;
+            border-radius: 12px !important;
+            padding: 20px !important;
+            background: {COLORS['panel_bg']} !important;
+        }}
+        
+        /* File uploader label - Make it black and visible - Comprehensive targeting */
+        [data-testid="stFileUploader"] label,
+        [data-testid="stFileUploader"] p,
+        [data-testid="stFileUploader"] div,
+        [data-testid="stFileUploader"] span,
+        [data-testid="stFileUploader"] *,
+        label[for*="resume"],
+        label[for*="uploader"],
+        .stFileUploader label,
+        .stFileUploader > label,
+        .stFileUploader > div > label,
+        .stFileUploader > div > div > label,
+        [data-testid="stFileUploader"] > div > label,
+        [data-testid="stFileUploader"] > div > div > label,
+        [data-testid="stFileUploader"] > div > div > div > label {{
+            color: {COLORS['text_dark']} !important;
+            font-weight: 700 !important;
+            font-size: 1.1rem !important;
+        }}
+        
+        /* Make all text in file uploader visible */
+        [data-testid="stFileUploader"] *,
+        [data-testid="stFileUploader"] p *,
+        [data-testid="stFileUploader"] div *,
+        [data-testid="stFileUploader"] span * {{
+            color: {COLORS['text_dark']} !important;
+        }}
+        
+        /* File uploader status text */
+        [data-testid="stFileUploaderStatus"],
+        [data-testid="stFileUploaderStatus"] * {{
+            color: {COLORS['text_dark']} !important;
+            font-weight: 500 !important;
+        }}
+        
+        /* Target the actual label text that Streamlit generates */
+        .element-container:has([data-testid="stFileUploader"]) label,
+        .element-container:has([data-testid="stFileUploader"]) > label,
+        div:has([data-testid="stFileUploader"]) label {{
+            color: {COLORS['text_dark']} !important;
+            font-weight: 700 !important;
+            font-size: 1.1rem !important;
+        }}
+        
+        /* Success/Error/Info messages with visible text */
+        .stSuccess {{
+            background: rgba(16, 185, 129, 0.15) !important;
+            border-left: 4px solid {COLORS['success']} !important;
+            border-radius: 8px !important;
+            padding: 1rem 1.25rem !important;
+        }}
+        
+        .stSuccess > div {{
+            color: {COLORS['text_dark']} !important;
+            font-weight: 600 !important;
+            font-size: 1rem !important;
+        }}
+        
+        .stSuccess p,
+        .stSuccess div,
+        .stSuccess span {{
+            color: {COLORS['text_dark']} !important;
+            font-weight: 500 !important;
+        }}
+        
+        /* Success message icon and text - comprehensive styling */
+        [data-testid="stSuccess"],
+        [data-testid="stSuccess"] *,
+        [data-testid="stSuccess"] > div,
+        [data-testid="stSuccess"] > div > div,
+        [data-testid="stSuccess"] p,
+        [data-testid="stSuccess"] div,
+        [data-testid="stSuccess"] span,
+        [data-testid="stSuccess"] label {{
+            color: {COLORS['text_dark']} !important;
+            font-weight: 600 !important;
+        }}
+        
+        /* Target all nested elements in success messages */
+        .stSuccess * {{
+            color: {COLORS['text_dark']} !important;
+        }}
+        
+        /* Ensure icon visibility */
+        .stSuccess svg {{
+            color: {COLORS['success']} !important;
+        }}
+        
+        .stError {{
+            background: rgba(239, 68, 68, 0.15) !important;
+            border-left: 4px solid {COLORS['error']} !important;
+            border-radius: 8px !important;
+            padding: 1rem 1.25rem !important;
+        }}
+        
+        .stError > div,
+        .stError p,
+        .stError div,
+        .stError span {{
+            color: {COLORS['text_dark']} !important;
+            font-weight: 500 !important;
+        }}
+        
+        .stWarning {{
+            background: rgba(245, 158, 11, 0.15) !important;
+            border-left: 4px solid {COLORS['warning']} !important;
+            border-radius: 8px !important;
+            padding: 1rem 1.25rem !important;
+        }}
+        
+        .stWarning > div,
+        .stWarning p,
+        .stWarning div,
+        .stWarning span {{
+            color: {COLORS['text_dark']} !important;
+            font-weight: 500 !important;
+        }}
+        
+        .stInfo {{
+            background: rgba(59, 130, 246, 0.15) !important;
+            border-left: 4px solid {COLORS['info']} !important;
+            border-radius: 8px !important;
+            padding: 1rem 1.25rem !important;
+        }}
+        
+        .stInfo > div,
+        .stInfo p,
+        .stInfo div,
+        .stInfo span {{
+            color: {COLORS['text_dark']} !important;
+            font-weight: 500 !important;
+        }}
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {{
+            width: 10px;
+            height: 10px;
+        }}
+        
+        ::-webkit-scrollbar-track {{
+            background: {COLORS['background']};
+            border-radius: 10px;
+        }}
+        
+        ::-webkit-scrollbar-thumb {{
+            background: {COLORS['gradient1']};
+            border-radius: 10px;
+        }}
+        
+        ::-webkit-scrollbar-thumb:hover {{
+            background: {COLORS['primary']};
         }}
     </style>
     """, unsafe_allow_html=True)

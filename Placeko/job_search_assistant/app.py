@@ -43,145 +43,7 @@ st.set_page_config(
 )
 
 
-# Custom CSS to enhance the UI with a professional balanced style
-# ui_utils.py styling function example:
-def apply_styling():
-    st.markdown(f"""
-    <style>
-        /* Global font styling */
-        * {{
-            font-family: 'Segoe UI', 'Roboto', 'Arial', sans-serif !important;
-        }}
-        
-        /* Main header styling - like the "You have 1 saved jobs" header */
-        h1, h2, .main-header {{
-            color: white !important;
-            background-color: {COLORS['primary']} !important;
-            padding: 20px !important;
-            border-radius: 8px !important;
-            margin-bottom: 20px !important;
-            font-weight: bold !important;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
-        }}
-        
-        /* Blue header panels styling - consistent across all pages */
-        div[style*="background-color: {COLORS['primary']}"],
-        div[style*="background-color: rgb(28, 78, 128)"],
-        [data-testid="stForm"] h3,
-        .blue-header {{
-            color: white !important;
-            font-size: 1.2rem !important;
-            font-weight: bold !important;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3) !important;
-            padding: 15px !important;
-            border-radius: 6px !important;
-            margin-bottom: 15px !important;
-            background-color: {COLORS['primary']} !important;
-        }}
-        
-        /* Fix for text in blue panels */
-        div[style*="background-color: {COLORS['primary']}"] p,
-        div[style*="background-color: {COLORS['primary']}"] span,
-        div[style*="background-color: {COLORS['primary']}"] h3,
-        div[style*="background-color: {COLORS['primary']}"] h4,
-        div[style*="background-color: {COLORS['primary']}"] div {{
-            color: white !important;
-            font-weight: bold !important;
-        }}
-        
-        /* Buttons styled like "Apply to this job" button */
-        .stButton>button,
-        button[kind="primary"] {{
-            background-color: {COLORS["accent3"]} !important;
-            color: white !important;
-            font-weight: bold !important;
-            border-radius: 4px !important;
-            padding: 0.5rem 1rem !important;
-            border: none !important;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1) !important;
-            transition: all 0.3s ease !important;
-            width: 100% !important;
-            font-size: 16px !important;
-            height: auto !important;
-        }}
-        
-        .stButton>button:hover,
-        button[kind="primary"]:hover {{
-            background-color: #E67E22 !important;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
-            transform: translateY(-1px) !important;
-        }}
-        
-        /* Tables like in Saved Jobs tab */
-        table, .dataframe, [data-testid="stTable"] {{
-            width: 100% !important;
-            border-collapse: collapse !important;
-            margin-bottom: 20px !important;
-            border-radius: 4px !important;
-            overflow: hidden !important;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05) !important;
-        }}
-        
-        /* Table headers like "Saved Jobs" tab */
-        th, thead tr th {{
-            background-color: #222222 !important;
-            color: white !important;
-            font-weight: bold !important;
-            padding: 12px 8px !important;
-            text-align: left !important;
-            border: none !important;
-        }}
-        
-        /* Table cells like "Saved Jobs" tab */
-        td, tbody tr td {{
-            padding: 12px 8px !important;
-            border-bottom: 1px solid #EEEEEE !important;
-            background-color: white !important;
-            color: black !important;
-        }}
-        
-        /* Alternate row styling */
-        tbody tr:nth-child(even) td {{
-            background-color: #f9f9f9 !important;
-        }}
-        
-        /* Main navigation tabs */
-        div[data-baseweb="tab-list"] {{
-            gap: 0 !important;
-            background-color: {COLORS["background"]} !important;
-            padding: 10px !important;
-            border-radius: 12px !important;
-            display: flex !important;
-            justify-content: space-between !important;
-            width: 100% !important;
-            margin-bottom: 20px !important;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1) !important;
-        }}
-        
-        div[data-baseweb="tab-list"] button {{
-            flex: 1 !important;
-            text-align: center !important;
-            margin: 0 5px !important;
-            height: 60px !important;
-            font-size: 16px !important;
-            background-color: rgba(255, 255, 255, 0.7) !important;
-            color: {COLORS["primary"]} !important;
-            border-radius: 8px !important;
-            border: 1px solid rgba(0,0,0,0.05) !important;
-            transition: all 0.3s ease !important;
-        }}
-        
-        div[data-baseweb="tab-list"] button[aria-selected="true"] {{
-            background-color: {COLORS["primary"]} !important;
-            color: white !important;
-            border-bottom: 3px solid {COLORS["accent3"]} !important;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;
-            transform: translateY(-2px) !important;
-        }}
-    </style>
-    """, unsafe_allow_html=True)
-# Apply custom styling
-# Apply custom styling
+# Apply custom styling from ui_utils
 apply_styling()
 
 # Initialize tools and agents
@@ -214,21 +76,56 @@ def load_resources():
 # Load resources
 resources = load_resources()
 
-# Application header with gradient using color palette
+# Website-style header/navbar
 st.markdown(f"""
-<div style='text-align:center; padding: 1.5rem 0; 
-background: linear-gradient(90deg, {COLORS["primary"]}, {COLORS["secondary"]}, {COLORS["tertiary"]}); 
-border-radius: 12px; margin-bottom: 2rem; box-shadow: 0 4px 12px rgba(0,0,0,0.1);'>
-    <h1 style='color: white; font-size: 2.5rem; margin-bottom: 0.5rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);'>
-    PLACEKO</h1>
-    <p style='color: white; font-size: 1.2rem; font-weight: 500; margin: 0.5rem 2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);'>
-    <span style='background-color: rgba(0,0,0,0.15); padding: 4px 12px; border-radius: 20px; margin: 0 5px;'>
-    AI-powered job search</span> 
-    <span style='background-color: rgba(0,0,0,0.15); padding: 4px 12px; border-radius: 20px; margin: 0 5px;'>
-    Resume analysis</span> 
-    <span style='background-color: rgba(0,0,0,0.15); padding: 4px 12px; border-radius: 20px; margin: 0 5px;'>
-    Interview preparation</span>
+<div style='
+    background: white;
+    border-bottom: 1px solid {COLORS["border"]};
+    padding: 1.5rem 0;
+    margin-bottom: 3rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+'>
+    <div style='max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center;'>
+        <div style='display: flex; align-items: center;'>
+            <h1 style='margin: 0; font-size: 1.75rem; font-weight: 700; color: {COLORS["text_dark"]};'>
+                💼 PLACEKO
+            </h1>
+        </div>
+        <div style='display: flex; gap: 2rem; align-items: center;'>
+            <span style='color: {COLORS["text_medium"]}; font-size: 0.95rem;'>AI-Powered Job Search Platform</span>
+        </div>
+    </div>
+</div>
+
+<div style='
+    max-width: 1200px;
+    margin: 0 auto 3rem auto;
+    padding: 4rem 2rem;
+    background: {COLORS["gradient1"]};
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 122, 255, 0.15);
+'>
+    <h1 style='color: white; font-size: 3.5rem; margin-bottom: 1.5rem; font-weight: 700; line-height: 1.2;'>
+        Find Your Dream Job
+    </h1>
+    <p style='color: rgba(255,255,255,0.95); font-size: 1.25rem; margin-bottom: 2rem; line-height: 1.6; max-width: 700px; margin-left: auto; margin-right: auto;'>
+        AI-powered job search, resume analysis, and interview preparation all in one place
     </p>
+    <div style='display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;'>
+        <div style='background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 0.75rem 1.5rem; border-radius: 8px; color: white; font-weight: 500;'>
+            🤖 Smart Job Matching
+        </div>
+        <div style='background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 0.75rem 1.5rem; border-radius: 8px; color: white; font-weight: 500;'>
+            📄 Resume Analysis
+        </div>
+        <div style='background: rgba(255,255,255,0.15); backdrop-filter: blur(10px); padding: 0.75rem 1.5rem; border-radius: 8px; color: white; font-weight: 500;'>
+            🎯 Interview Prep
+        </div>
+    </div>
 </div>
 """, unsafe_allow_html=True)
 
@@ -260,7 +157,9 @@ if hasattr(st.session_state, 'active_tab'):
 
 # Tab 1: Resume Analysis
 with tabs[0]:
-    st.header("Resume Analysis")
+    st.markdown("<div style='margin-bottom: 2rem;'></div>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='color: {COLORS['text_dark']}; margin-bottom: 0.5rem;'>Resume Analysis</h2>", unsafe_allow_html=True)
+    st.markdown(f"<p style='color: {COLORS['text_medium']}; margin-bottom: 2rem; font-size: 1.1rem;'>Upload your resume to get AI-powered analysis and insights</p>", unsafe_allow_html=True)
     
     # Create two columns for upload options
     col1, col2 = st.columns(2)
@@ -269,14 +168,23 @@ with tabs[0]:
         # Resume upload section
         st.subheader("Upload Resume")
         st.markdown(f"""
-        <div style="background-color: {COLORS["panel_bg"]}; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-        <p style="margin-bottom: 10px;">Upload your resume in PDF, DOCX, or TXT format.</p>
-        <p>We'll analyze your resume and extract key information to help you find matching jobs.</p>
+        <div style="background-color: {COLORS["card_bg"]}; padding: 20px; border-radius: 8px; margin-bottom: 20px; border: 1px solid {COLORS["border"]}; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+        <p style="margin-bottom: 12px; color: {COLORS["text_dark"]}; font-size: 1rem; font-weight: 500;">📄 Upload your resume in PDF, DOCX, or TXT format.</p>
+        <p style="margin: 0; color: {COLORS["text_medium"]}; font-size: 0.95rem; line-height: 1.6;">We'll analyze your resume and extract key information to help you find matching jobs.</p>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # Custom label for file uploader to ensure visibility
+        st.markdown(f"""
+        <div style="margin-bottom: 10px;">
+            <label style="color: {COLORS['text_dark']}; font-weight: 700; font-size: 1.1rem; display: block; margin-bottom: 8px;">
+                Upload your resume
+            </label>
         </div>
         """, unsafe_allow_html=True)
         
         # Resume file uploader
-        resume_file = st.file_uploader("Upload your resume", type=["pdf", "txt", "docx"], key="resume_uploader")
+        resume_file = st.file_uploader("", type=["pdf", "txt", "docx"], key="resume_uploader", label_visibility="collapsed")
         
         # Process uploaded resume
         if resume_file is not None:
@@ -331,7 +239,19 @@ with tabs[0]:
                             st.session_state.resume_data["analysis"] = resume_analysis
                             st.session_state.resume_data["raw_text"] = extracted_text
                             
-                            st.success("Resume analysis complete! Review the extracted information and analysis below.")
+                            # Display highly visible success message
+                            st.markdown(f"""
+                            <div style="background: {COLORS['success']}; color: white; padding: 20px; 
+                            border-radius: 12px; margin: 20px 0; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+                            border-left: 6px solid #059669;">
+                                <h3 style="color: white; margin: 0 0 10px 0; font-weight: 700; font-size: 1.3rem; text-shadow: 0 2px 4px rgba(0,0,0,0.2);">
+                                    ✅ Resume Analysis Complete!
+                                </h3>
+                                <p style="color: white; margin: 0; font-size: 1.1rem; font-weight: 500; text-shadow: 0 1px 2px rgba(0,0,0,0.2);">
+                                    Review the extracted information and analysis below.
+                                </p>
+                            </div>
+                            """, unsafe_allow_html=True)
                         else:
                             st.error("Could not extract text from the uploaded file.")
                     except Exception as file_error:
@@ -404,15 +324,15 @@ with tabs[0]:
         # Add a section to explain resume improvement suggestions
         with st.expander("Resume Improvement Recommendations", expanded=False):
             st.markdown(f"""
-            <div style="background-color: {COLORS["panel_bg"]}; padding: 15px; border-radius: 8px; margin: 10px 0;">
-            <h4 style="color: {COLORS["primary"]};">How to Improve Your Resume</h4>
-            <p>Based on our analysis, here are some suggestions to enhance your resume:</p>
-            <ul>
-            <li><strong>Keyword Optimization:</strong> Add more industry-specific keywords that appear in job descriptions you're targeting.</li>
-            <li><strong>Quantify Achievements:</strong> Add numbers and percentages to demonstrate the impact of your work.</li>
-            <li><strong>Technical Skills:</strong> Ensure all relevant technical skills are clearly listed in a dedicated section.</li>
-            <li><strong>Action Verbs:</strong> Start achievement bullets with strong action verbs like "Implemented," "Developed," or "Reduced."</li>
-            <li><strong>Formatting:</strong> Ensure consistent formatting and eliminate any complex design elements that might confuse ATS systems.</li>
+            <div style="background-color: {COLORS["card_bg"]}; padding: 20px; border-radius: 8px; margin: 10px 0; border: 1px solid {COLORS["border"]}; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <h4 style="color: {COLORS["primary"]}; margin-top: 0; margin-bottom: 15px;">How to Improve Your Resume</h4>
+            <p style="color: {COLORS["text_dark"]}; margin-bottom: 15px;">Based on our analysis, here are some suggestions to enhance your resume:</p>
+            <ul style="color: {COLORS["text_dark"]}; line-height: 1.8;">
+            <li style="margin-bottom: 10px;"><strong style="color: {COLORS["text_dark"]};">Keyword Optimization:</strong> <span style="color: {COLORS["text_medium"]};">Add more industry-specific keywords that appear in job descriptions you're targeting.</span></li>
+            <li style="margin-bottom: 10px;"><strong style="color: {COLORS["text_dark"]};">Quantify Achievements:</strong> <span style="color: {COLORS["text_medium"]};">Add numbers and percentages to demonstrate the impact of your work.</span></li>
+            <li style="margin-bottom: 10px;"><strong style="color: {COLORS["text_dark"]};">Technical Skills:</strong> <span style="color: {COLORS["text_medium"]};">Ensure all relevant technical skills are clearly listed in a dedicated section.</span></li>
+            <li style="margin-bottom: 10px;"><strong style="color: {COLORS["text_dark"]};">Action Verbs:</strong> <span style="color: {COLORS["text_medium"]};">Start achievement bullets with strong action verbs like "Implemented," "Developed," or "Reduced."</span></li>
+            <li style="margin-bottom: 10px;"><strong style="color: {COLORS["text_dark"]};">Formatting:</strong> <span style="color: {COLORS["text_medium"]};">Ensure consistent formatting and eliminate any complex design elements that might confuse ATS systems.</span></li>
             </ul>
             </div>
             """, unsafe_allow_html=True)
@@ -428,7 +348,9 @@ with tabs[0]:
 
 # Tab 2: Job Search
 with tabs[1]:
-    st.header("Job Search")
+    st.markdown("<div style='margin-bottom: 2rem;'></div>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='color: {COLORS['text_dark']}; margin-bottom: 0.5rem;'>Job Search</h2>", unsafe_allow_html=True)
+    st.markdown(f"<p style='color: {COLORS['text_medium']}; margin-bottom: 2rem; font-size: 1.1rem;'>Search for jobs across multiple platforms with AI-powered matching</p>", unsafe_allow_html=True)
     
     # Common job titles and locations
     common_job_titles = [
@@ -457,8 +379,8 @@ with tabs[1]:
         if st.session_state.resume_data:
             st.subheader("Find Jobs Matching Your Resume")
             st.markdown(f"""
-            <div style="background-color: {COLORS["panel_bg"]}; padding: 15px; border-radius: 8px; margin-bottom: 15px;">
-            <p style="font-weight: 500; margin-bottom: 10px;">This will extract keywords from your resume and search for relevant jobs automatically.</p>
+            <div style="background-color: {COLORS["card_bg"]}; padding: 18px; border-radius: 8px; margin-bottom: 15px; border: 1px solid {COLORS["border"]}; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <p style="font-weight: 500; margin-bottom: 0; color: {COLORS["text_dark"]}; font-size: 1rem;">This will extract keywords from your resume and search for relevant jobs automatically.</p>
             </div>
             """, unsafe_allow_html=True)
             
@@ -556,11 +478,11 @@ with tabs[1]:
             st.warning("Please upload your resume in the Resume Analysis tab to enable resume-based job search.")
             
             st.markdown(f"""
-            <div style="background-color: {COLORS["panel_bg"]}; padding: 15px; border-radius: 8px;">
-            <ol style="margin-left: 15px; margin-bottom: 0;">
-            <li>Go to the Resume Analysis tab</li>
-            <li>Upload your resume (PDF, DOCX, or TXT)</li>
-            <li>Return to this tab to search for jobs based on your resume</li>
+            <div style="background-color: {COLORS["card_bg"]}; padding: 20px; border-radius: 8px; border: 1px solid {COLORS["border"]}; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">
+            <ol style="margin-left: 20px; margin-bottom: 0; color: {COLORS["text_dark"]}; line-height: 1.8;">
+            <li style="margin-bottom: 8px; color: {COLORS["text_dark"]};">Go to the Resume Analysis tab</li>
+            <li style="margin-bottom: 8px; color: {COLORS["text_dark"]};">Upload your resume (PDF, DOCX, or TXT)</li>
+            <li style="margin-bottom: 0; color: {COLORS["text_dark"]};">Return to this tab to search for jobs based on your resume</li>
             </ol>
             </div>
             """, unsafe_allow_html=True)
@@ -796,12 +718,14 @@ with tabs[1]:
                     st.session_state.selected_job = sorted_jobs[selected_index]
                     selected_job = st.session_state.selected_job
                     
-                    # Job title and company with professional styling
+                    # Job title and company with beautiful gradient styling
                     st.markdown(f"""
-                    <div style='background: linear-gradient(90deg, {COLORS["primary"]}, {COLORS["secondary"]}); 
-                    padding: 1rem; border-radius: 10px; margin-bottom: 1rem; box-shadow: 0 3px 10px rgba(0,0,0,0.2);'>
-                        <h3 style='color: white; margin: 0; font-weight: 600; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);'>{selected_job['title']}</h3>
-                        <p style='color: white; font-size: 1.1rem; margin: 0.5rem 0 0 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);'>{selected_job['company']}</p>
+                    <div style='background: {COLORS["gradient1"]}; 
+                    padding: 1.5rem; border-radius: 16px; margin-bottom: 1.5rem; box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);'>
+                        <h3 style='color: white; margin: 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+                        font-size: 1.8rem;'>{selected_job['title']}</h3>
+                        <p style='color: white; font-size: 1.3rem; margin: 0.8rem 0 0 0; text-shadow: 0 2px 4px rgba(0,0,0,0.2); 
+                        font-weight: 600;'>{selected_job['company']}</p>
                     </div>
                     """, unsafe_allow_html=True)
                     
@@ -809,43 +733,48 @@ with tabs[1]:
                     col1, col2, col3 = st.columns(3)
                     
                     with col1:
-                        st.markdown(f"""<div style="background-color: {COLORS["primary"]}; color: white; 
-                        padding: 10px; border-radius: 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                        <p style="margin: 0; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">Location</p>
-                        <p style="margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">{selected_job.get('location', 'Not specified')}</p>
+                        st.markdown(f"""<div style="background: {COLORS["gradient3"]}; color: white; 
+                        padding: 16px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);">
+                        <p style="margin: 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 0.9rem; 
+                        text-transform: uppercase; letter-spacing: 1px;">📍 Location</p>
+                        <p style="margin: 8px 0 0 0; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: 600; font-size: 1.1rem;">{selected_job.get('location', 'Not specified')}</p>
                         </div>""", unsafe_allow_html=True)
                     
                     with col2:
-                        st.markdown(f"""<div style="background-color: {COLORS["primary"]}; color: white; 
-                        padding: 10px; border-radius: 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                        <p style="margin: 0; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">Platform</p>
-                        <p style="margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">{selected_job.get('platform', 'Unknown')}</p>
+                        st.markdown(f"""<div style="background: {COLORS["gradient1"]}; color: white; 
+                        padding: 16px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);">
+                        <p style="margin: 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 0.9rem; 
+                        text-transform: uppercase; letter-spacing: 1px;">🌐 Platform</p>
+                        <p style="margin: 8px 0 0 0; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: 600; font-size: 1.1rem;">{selected_job.get('platform', 'Unknown')}</p>
                         </div>""", unsafe_allow_html=True)
                     
                     with col3:
-                        st.markdown(f"""<div style="background-color: {COLORS["primary"]}; color: white; 
-                        padding: 10px; border-radius: 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                        <p style="margin: 0; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">Posted</p>
-                        <p style="margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">{selected_job.get('date_posted', 'Recent')}</p>
+                        st.markdown(f"""<div style="background: {COLORS["gradient4"]}; color: white; 
+                        padding: 16px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
+                        <p style="margin: 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 0.9rem; 
+                        text-transform: uppercase; letter-spacing: 1px;">📅 Posted</p>
+                        <p style="margin: 8px 0 0 0; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: 600; font-size: 1.1rem;">{selected_job.get('date_posted', 'Recent')}</p>
                         </div>""", unsafe_allow_html=True)
                     
                     # Job type if available
                     if selected_job.get('job_type'):
-                        st.markdown(f"""<div style="background-color: {COLORS["secondary"]}; color: white; 
-                        padding: 8px 15px; border-radius: 20px; display: inline-block; margin: 10px 0; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                        <span style="text-shadow: 1px 1px 1px rgba(0,0,0,0.2);">{selected_job.get('job_type')}</span></div>""", unsafe_allow_html=True)
+                        st.markdown(f"""<div style="background: {COLORS["gradient5"]}; color: white; 
+                        padding: 10px 20px; border-radius: 25px; display: inline-block; margin: 15px 0; 
+                        box-shadow: 0 4px 12px rgba(250, 112, 154, 0.3); font-weight: 600;">
+                        <span style="text-shadow: 0 2px 4px rgba(0,0,0,0.2);">{selected_job.get('job_type')}</span></div>""", unsafe_allow_html=True)
                     
-                    # Apply button
+                    # Apply button with beautiful gradient
                     if selected_job.get('apply_url'):
                         apply_url = selected_job['apply_url']
                         is_real_job = selected_job.get('is_real_job', False)
                         
                         st.markdown(f"""
-                        <div style="background-color: {COLORS["accent"]}; padding: 12px; 
-                        border-radius: 6px; margin: 15px 0; text-align: center; box-shadow: 0 3px 8px rgba(0,0,0,0.15);">
+                        <div style="background: {COLORS["gradient2"]}; padding: 18px; 
+                        border-radius: 12px; margin: 20px 0; text-align: center; box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);">
                         <a href="{apply_url}" target="_blank" style="color: white; 
-                        text-decoration: none; font-weight: bold; display: block; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
-                        {'➡️ Apply Now' if is_real_job else '➡️ View Job Details'}</a>
+                        text-decoration: none; font-weight: 700; display: block; text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+                        font-size: 1.2rem;">
+                        {'🚀 Apply Now' if is_real_job else '👁️ View Job Details'}</a>
                         </div>
                         """, unsafe_allow_html=True)
                         
@@ -966,7 +895,9 @@ with tabs[1]:
 
 # Tab 3: Interview Preparation
 with tabs[2]:
-    st.header("Interview Preparation")
+    st.markdown("<div style='margin-bottom: 2rem;'></div>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='color: {COLORS['text_dark']}; margin-bottom: 0.5rem;'>Interview Preparation</h2>", unsafe_allow_html=True)
+    st.markdown(f"<p style='color: {COLORS['text_medium']}; margin-bottom: 2rem; font-size: 1.1rem;'>Prepare for interviews with personalized questions and answers</p>", unsafe_allow_html=True)
     
     # Check if coming from another tab
     if hasattr(st.session_state, 'active_tab') and st.session_state.active_tab == 2:
@@ -976,12 +907,14 @@ with tabs[2]:
     if st.session_state.selected_job:
         selected_job = st.session_state.selected_job
         
-        # Job details display
+        # Job details display with beautiful gradient
         st.markdown(f"""
-        <div style='background: linear-gradient(90deg, {COLORS["primary"]}, {COLORS["secondary"]}); 
-        padding: 1rem; border-radius: 10px; margin-bottom: 1rem; box-shadow: 0 3px 10px rgba(0,0,0,0.15);'>
-            <h3 style='color: white; margin: 0; font-weight: 600; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);'>Prepare for: {selected_job['title']}</h3>
-            <p style='color: white; font-size: 1.1rem; margin: 0.5rem 0 0 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);'>{selected_job['company']}</p>
+        <div style='background: {COLORS["gradient1"]}; 
+        padding: 1.5rem; border-radius: 16px; margin-bottom: 1.5rem; box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);'>
+            <h3 style='color: white; margin: 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+            font-size: 1.8rem;'>🎯 Prepare for: {selected_job['title']}</h3>
+            <p style='color: white; font-size: 1.3rem; margin: 0.8rem 0 0 0; text-shadow: 0 2px 4px rgba(0,0,0,0.2); 
+            font-weight: 600;'>{selected_job['company']}</p>
         </div>
         """, unsafe_allow_html=True)
         
@@ -1246,9 +1179,10 @@ with tabs[2]:
                             question_text = parts[1]
                         
                         with st.expander(question_title, expanded=i==1):
-                            st.markdown(f"""<div style="background-color: {COLORS["primary"]}; color: white; 
-                            padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                            <span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">{question_text}</span>
+                            st.markdown(f"""<div style="background: {COLORS["gradient_light1"]}; color: {COLORS["text_dark"]}; 
+                            padding: 20px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid {COLORS["primary"]}; 
+                            box-shadow: 0 2px 8px {COLORS["shadow"]}; line-height: 1.7;">
+                            <span style="font-weight: 500;">{question_text}</span>
                             </div>""", unsafe_allow_html=True)
                             
                             # Add note-taking area
@@ -1267,44 +1201,48 @@ with tabs[2]:
                         with st.expander(question_title, expanded=i==1):
                             # Display full question text if it was truncated in the title
                             if len(question.get('question', '')) > 77 and "..." in question_title:
-                                st.markdown(f"""<div style="background-color: {COLORS["primary"]}; color: white; 
-                                padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                                <span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">{question.get('question')}</span>
+                                st.markdown(f"""<div style="background: {COLORS["gradient_light1"]}; color: {COLORS["text_dark"]}; 
+                                padding: 20px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid {COLORS["primary"]}; 
+                                box-shadow: 0 2px 8px {COLORS["shadow"]}; line-height: 1.7;">
+                                <span style="font-weight: 500;">{question.get('question')}</span>
                                 </div>""", unsafe_allow_html=True)
                             
                             # Display context if available
                             if question.get('context'):
-                                st.markdown("<h4>Question Context</h4>", unsafe_allow_html=True)
-                                st.markdown(f"""<div style="background-color: {COLORS["secondary"]}; color: white; 
-                                padding: 12px; border-radius: 6px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                                <span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">{question['context']}</span>
+                                st.markdown(f"""<h4 style="color: {COLORS["text_dark"]};">Question Context</h4>""", unsafe_allow_html=True)
+                                st.markdown(f"""<div style="background: {COLORS["card_bg"]}; color: {COLORS["text_dark"]}; 
+                                padding: 16px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid {COLORS["secondary"]}; 
+                                box-shadow: 0 2px 8px {COLORS["shadow"]}; line-height: 1.7;">
+                                <span style="font-weight: 400;">{question['context']}</span>
                                 </div>""", unsafe_allow_html=True)
                             
                             # Display suggested approach if available
                             if question.get('approach') or question.get('suggested_approach'):
                                 approach = question.get('approach', question.get('suggested_approach', ''))
-                                st.markdown("<h4>Suggested Approach</h4>", unsafe_allow_html=True)
-                                st.markdown(f"""<div style="background-color: {COLORS["tertiary"]}; color: white; 
-                                padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                                <span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">{approach}</span>
+                                st.markdown(f"""<h4 style="color: {COLORS["text_dark"]};">Suggested Approach</h4>""", unsafe_allow_html=True)
+                                st.markdown(f"""<div style="background: {COLORS["gradient_light2"]}; color: {COLORS["text_dark"]}; 
+                                padding: 18px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid {COLORS["tertiary"]}; 
+                                box-shadow: 0 2px 8px {COLORS["shadow"]}; line-height: 1.7;">
+                                <span style="font-weight: 400;">{approach}</span>
                                 </div>""", unsafe_allow_html=True)
                             
                             # Display suggested answer if available
-                            # Display suggested answer if available
                             if question.get('suggested_answer') or question.get('answer'):
                                 answer = question.get('suggested_answer', question.get('answer', ''))
-                                st.markdown("<h4>Suggested Answer</h4>", unsafe_allow_html=True)
-                                st.markdown(f"""<div style="background-color: {COLORS["primary"]}; color: white; 
-                                padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                                <span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">{answer}</span>
+                                st.markdown(f"""<h4 style="color: {COLORS["text_dark"]};">Suggested Answer</h4>""", unsafe_allow_html=True)
+                                st.markdown(f"""<div style="background: {COLORS["gradient_light3"]}; color: {COLORS["text_dark"]}; 
+                                padding: 18px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid {COLORS["primary"]}; 
+                                box-shadow: 0 2px 8px {COLORS["shadow"]}; line-height: 1.7;">
+                                <span style="font-weight: 400;">{answer}</span>
                                 </div>""", unsafe_allow_html=True)
                             
                             # Display tips if available
                             if question.get('tips'):
-                                st.markdown("<h4>Interview Tips</h4>", unsafe_allow_html=True)
-                                st.markdown(f"""<div style="background-color: {COLORS["accent1"]}; color: white; 
-                                padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                                <span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">{question['tips']}</span>
+                                st.markdown(f"""<h4 style="color: {COLORS["text_dark"]};">Interview Tips</h4>""", unsafe_allow_html=True)
+                                st.markdown(f"""<div style="background: {COLORS["gradient_light4"]}; color: {COLORS["text_dark"]}; 
+                                padding: 18px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid {COLORS["quaternary"]}; 
+                                box-shadow: 0 2px 8px {COLORS["shadow"]}; line-height: 1.7;">
+                                <span style="font-weight: 400;">{question['tips']}</span>
                                 </div>""", unsafe_allow_html=True)
                             
                             # Display code solution for coding questions if available
@@ -1449,9 +1387,10 @@ with tabs[2]:
                 if isinstance(question, str):
                     # If it's a string, display it directly
                     with st.expander(f"Question {i}", expanded=i==1):
-                        st.markdown(f"""<div style="background-color: {COLORS["primary"]}; color: white; 
-                        padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                        <span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">{question}</span>
+                        st.markdown(f"""<div style="background: {COLORS["gradient_light1"]}; color: {COLORS["text_dark"]}; 
+                        padding: 20px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid {COLORS["primary"]}; 
+                        box-shadow: 0 2px 8px {COLORS["shadow"]}; line-height: 1.7;">
+                        <span style="font-weight: 500;">{question}</span>
                         </div>""", unsafe_allow_html=True)
                         
                         # Add note-taking area
@@ -1470,26 +1409,29 @@ with tabs[2]:
                     with st.expander(question_title, expanded=i==1):
                         # Display full question text if it was truncated in the title
                         if len(question.get('question', '')) > 77 and "..." in question_title:
-                            st.markdown(f"""<div style="background-color: {COLORS["primary"]}; color: white; 
-                            padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                            <span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">{question.get('question')}</span>
+                            st.markdown(f"""<div style="background: {COLORS["gradient_light1"]}; color: {COLORS["text_dark"]}; 
+                            padding: 20px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid {COLORS["primary"]}; 
+                            box-shadow: 0 2px 8px {COLORS["shadow"]}; line-height: 1.7;">
+                            <span style="font-weight: 500;">{question.get('question')}</span>
                             </div>""", unsafe_allow_html=True)
                         
                         # Display suggested answer if available
                         if question.get('suggested_answer'):
-                            st.markdown("<h4>Suggested Answer</h4>", unsafe_allow_html=True)
-                            st.markdown(f"""<div style="background-color: {COLORS["primary"]}; color: white; 
-                            padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                            <span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">{question['suggested_answer']}</span>
+                            st.markdown(f"""<h4 style="color: {COLORS["text_dark"]};">Suggested Answer</h4>""", unsafe_allow_html=True)
+                            st.markdown(f"""<div style="background: {COLORS["gradient_light3"]}; color: {COLORS["text_dark"]}; 
+                            padding: 18px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid {COLORS["primary"]}; 
+                            box-shadow: 0 2px 8px {COLORS["shadow"]}; line-height: 1.7;">
+                            <span style="font-weight: 400;">{question['suggested_answer']}</span>
                             </div>""", 
                             unsafe_allow_html=True)
                         
                         # Display tips if available
                         if question.get('tips'):
-                            st.markdown("<h4>Tips</h4>", unsafe_allow_html=True)
-                            st.markdown(f"""<div style="background-color: {COLORS["accent1"]}; color: white; 
-                            padding: 15px; border-radius: 8px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                            <span style="text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">{question['tips']}</span>
+                            st.markdown(f"""<h4 style="color: {COLORS["text_dark"]};">Tips</h4>""", unsafe_allow_html=True)
+                            st.markdown(f"""<div style="background: {COLORS["gradient_light4"]}; color: {COLORS["text_dark"]}; 
+                            padding: 18px; border-radius: 12px; margin-bottom: 15px; border-left: 4px solid {COLORS["quaternary"]}; 
+                            box-shadow: 0 2px 8px {COLORS["shadow"]}; line-height: 1.7;">
+                            <span style="font-weight: 400;">{question['tips']}</span>
                             </div>""", 
                             unsafe_allow_html=True)
                         
@@ -1502,7 +1444,9 @@ with tabs[2]:
 
 # Tab 4: Saved Jobs
 with tabs[3]:
-    st.header("Saved Jobs")
+    st.markdown("<div style='margin-bottom: 2rem;'></div>", unsafe_allow_html=True)
+    st.markdown(f"<h2 style='color: {COLORS['text_dark']}; margin-bottom: 0.5rem;'>Saved Jobs</h2>", unsafe_allow_html=True)
+    st.markdown(f"<p style='color: {COLORS['text_medium']}; margin-bottom: 2rem; font-size: 1.1rem;'>View and manage your saved job listings</p>", unsafe_allow_html=True)
     
     # Refresh saved jobs list
     st.session_state.saved_jobs = load_saved_jobs()
@@ -1510,11 +1454,12 @@ with tabs[3]:
     if not st.session_state.saved_jobs:
         st.info("You haven't saved any jobs yet. Use the Job Search tab to find and save jobs.")
     else:
-        # Display count of saved jobs
+        # Display count of saved jobs with beautiful gradient
         st.markdown(f"""
-        <div style="background-color: {COLORS["primary"]}; color: white; 
-        padding: 10px 15px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);">
-        <h3 style="margin: 0; font-weight: 600; text-shadow: 1px 1px 2px rgba(0,0,0,0.3);">You have {len(st.session_state.saved_jobs)} saved jobs</h3>
+        <div style="background: {COLORS["gradient1"]}; color: white; 
+        padding: 24px 28px; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 4px 20px {COLORS["shadow_medium"]};">
+        <h3 style="margin: 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 1.6rem;">
+        💼 You have {len(st.session_state.saved_jobs)} saved jobs</h3>
         </div>
         """, unsafe_allow_html=True)
         
@@ -1555,12 +1500,14 @@ with tabs[3]:
                 st.session_state.selected_job = st.session_state.saved_jobs[selected_index]
                 selected_job = st.session_state.selected_job
                 
-                # Job title and company with professional styling
+                # Job title and company with beautiful gradient styling
                 st.markdown(f"""
-                <div style='background: linear-gradient(90deg, {COLORS["primary"]}, {COLORS["secondary"]}); 
-                padding: 1rem; border-radius: 10px; margin-bottom: 1rem; box-shadow: 0 3px 10px rgba(0,0,0,0.15);'>
-                    <h3 style='color: white; margin: 0; font-weight: 600; text-shadow: 1px 1px 3px rgba(0,0,0,0.3);'>{selected_job['title']}</h3>
-                    <p style='color: white; font-size: 1.1rem; margin: 0.5rem 0 0 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);'>{selected_job['company']}</p>
+                <div style='background: {COLORS["gradient1"]}; 
+                padding: 1.5rem; border-radius: 16px; margin-bottom: 1.5rem; box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);'>
+                    <h3 style='color: white; margin: 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+                    font-size: 1.8rem;'>{selected_job['title']}</h3>
+                    <p style='color: white; font-size: 1.3rem; margin: 0.8rem 0 0 0; text-shadow: 0 2px 4px rgba(0,0,0,0.2); 
+                    font-weight: 600;'>{selected_job['company']}</p>
                 </div>
                 """, unsafe_allow_html=True)
                 
@@ -1568,35 +1515,39 @@ with tabs[3]:
                 col1, col2, col3 = st.columns(3)
                 
                 with col1:
-                    st.markdown(f"""<div style="background-color: {COLORS["primary"]}; color: white; 
-                    padding: 10px; border-radius: 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    <p style="margin: 0; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">Location</p>
-                    <p style="margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">{selected_job.get('location', 'Not specified')}</p>
+                    st.markdown(f"""<div style="background: {COLORS["gradient3"]}; color: white; 
+                    padding: 16px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);">
+                    <p style="margin: 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 0.9rem; 
+                    text-transform: uppercase; letter-spacing: 1px;">📍 Location</p>
+                    <p style="margin: 8px 0 0 0; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: 600; font-size: 1.1rem;">{selected_job.get('location', 'Not specified')}</p>
                     </div>""", unsafe_allow_html=True)
                 
                 with col2:
-                    st.markdown(f"""<div style="background-color: {COLORS["primary"]}; color: white; 
-                    padding: 10px; border-radius: 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    <p style="margin: 0; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">Platform</p>
-                    <p style="margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">{selected_job.get('platform', 'Unknown')}</p>
+                    st.markdown(f"""<div style="background: {COLORS["gradient1"]}; color: white; 
+                    padding: 16px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);">
+                    <p style="margin: 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 0.9rem; 
+                    text-transform: uppercase; letter-spacing: 1px;">🌐 Platform</p>
+                    <p style="margin: 8px 0 0 0; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: 600; font-size: 1.1rem;">{selected_job.get('platform', 'Unknown')}</p>
                     </div>""", unsafe_allow_html=True)
                 
                 with col3:
                     date_info = selected_job.get('date_saved', selected_job.get('date_posted', 'Recent'))
-                    st.markdown(f"""<div style="background-color: {COLORS["primary"]}; color: white; 
-                    padding: 10px; border-radius: 8px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
-                    <p style="margin: 0; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">Date Saved</p>
-                    <p style="margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">{date_info}</p>
+                    st.markdown(f"""<div style="background: {COLORS["gradient4"]}; color: white; 
+                    padding: 16px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);">
+                    <p style="margin: 0; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 0.9rem; 
+                    text-transform: uppercase; letter-spacing: 1px;">📅 Date Saved</p>
+                    <p style="margin: 8px 0 0 0; text-shadow: 0 2px 4px rgba(0,0,0,0.2); font-weight: 600; font-size: 1.1rem;">{date_info}</p>
                     </div>""", unsafe_allow_html=True)
                 
-                # Display job URL as a clickable link
+                # Display job URL as a beautiful clickable link
                 if selected_job.get('apply_url'):
                     st.markdown(f"""
-                    <div style="background-color: {COLORS["accent"]}; padding: 12px; 
-                    border-radius: 6px; margin: 15px 0; text-align: center; box-shadow: 0 3px 8px rgba(0,0,0,0.15);">
+                    <div style="background: {COLORS["gradient2"]}; padding: 18px; 
+                    border-radius: 12px; margin: 20px 0; text-align: center; box-shadow: 0 6px 20px rgba(239, 68, 68, 0.4);">
                     <a href="{selected_job['apply_url']}" target="_blank" style="color: white; 
-                    text-decoration: none; font-weight: bold; display: block; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">
-                    ➡️ Apply to this job</a>
+                    text-decoration: none; font-weight: 700; display: block; text-shadow: 0 2px 4px rgba(0,0,0,0.3); 
+                    font-size: 1.2rem;">
+                    🚀 Apply to this job</a>
                     </div>
                     """, unsafe_allow_html=True)
                 
@@ -1629,12 +1580,22 @@ with tabs[3]:
                         st.session_state.active_tab = 2  # Switch to Interview tab
                         st.rerun()
 
-# Footer
-st.markdown("---")
-st.markdown(
-    f"""<div style='text-align: center; background: linear-gradient(90deg, {COLORS["primary"]}, {COLORS["secondary"]}); 
-    color: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.15);'>
-    <p style="margin: 0; text-shadow: 1px 1px 2px rgba(0,0,0,0.2);">Professional Job Search Assistant | Built with Streamlit | © {datetime.now().year}</p>
-    </div>""",
-    unsafe_allow_html=True
-)
+# Website-style footer
+st.markdown("""
+<div style='
+    margin-top: 5rem;
+    padding-top: 3rem;
+    border-top: 1px solid #e5e7eb;
+    background: #f8f9fa;
+    padding: 3rem 2rem;
+'>
+    <div style='max-width: 1200px; margin: 0 auto; text-align: center;'>
+        <p style='color: #6b7280; margin: 0.5rem 0; font-size: 0.95rem;'>
+            <strong style='color: #1d1d1f;'>PLACEKO</strong> - AI-Powered Job Search Platform
+        </p>
+        <p style='color: #9ca3af; margin: 0.5rem 0; font-size: 0.875rem;'>
+            Built with Streamlit | © """ + str(datetime.now().year) + """
+        </p>
+    </div>
+</div>
+""", unsafe_allow_html=True)
